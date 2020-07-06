@@ -27,7 +27,7 @@ add_ssh_private_key_to_agent() {
   fi
 
   echo "Loading ssh-key into ssh-agent (pid ${SSH_AGENT_PID:-})" >&2;
-  echo "$ssh_key" | env SSH_ASKPASS="/bin/false" ssh-add -
+  echo "$ssh_key" | base64 -d | env SSH_ASKPASS="/bin/false" ssh-add -
 }
 
 in_array() {
