@@ -37,8 +37,15 @@ fi
 
 # First up we look for ssh keys if the repository is ssh
 if [[ "${BUILDKITE_REPO:-}" =~ ^git ]] ; then
+
+  ADDITIONAL_SECRET=""
+  if [ -n "$ADDITIONAL_PIPELINE_SLUG" ]; then
+    ADDITIONAL_SECRET="${BUILDKITE_SECRETS_PREFIX}/${ADDITIONAL_PIPELINE_SLUG}/ssh-private-key"
+  fi
+
   ssh_key_paths=(
     "${BUILDKITE_SECRETS_PREFIX}/${BUILDKITE_PIPELINE_SLUG}/ssh-private-key"
+    "${ADDITIONAL_SECRET}"
   )
 
   # Look in our key paths in order, but we'll load them all
