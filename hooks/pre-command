@@ -39,7 +39,7 @@ fi
 if [[ "${BUILDKITE_REPO:-}" =~ ^git ]] ; then
 
   ADDITIONAL_SECRET=""
-  if [ -n "$ADDITIONAL_PIPELINE_SLUG" ]; then
+  if [[ -n "${ADDITIONAL_PIPELINE_SLUG:-}" ]]; then
     ADDITIONAL_SECRET="${BUILDKITE_SECRETS_PREFIX}/${ADDITIONAL_PIPELINE_SLUG}/ssh-private-key"
   fi
 
